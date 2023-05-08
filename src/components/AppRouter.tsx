@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Context } from "../main";
 import { authRoutes, publicRoutes } from "../utils/routes";
-import { FooterCentered } from "./Footer/Footer";
+import FooterCentered from "./Footer/Footer";
 import HeaderSearch from "./Header/Header";
 import NavbarMinimal  from "./Navbar";
 

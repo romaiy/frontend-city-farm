@@ -1,8 +1,11 @@
 import { createStyles, Flex, rem, Stack } from "@mantine/core";
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
+import { Context } from "../../main";
 
-const useStyles = createStyles(() => ({
+const useStyles = createStyles((theme, isAuth:boolean) => ({
     mainWrapper: {
-        padding: `${rem(32)}`,
+        padding: isAuth ? `${rem(32)}` : '32px 80px 34px 80px',
     },
 }));
 
@@ -11,7 +14,8 @@ type Props = {
 };
 
 const Wrapper = ({children}: Props) => {
-    const { classes } = useStyles();
+    const { UStore } = useContext(Context);
+    const { classes } = useStyles(UStore.isAuth);
 
     return (
         <Flex justify="space-between" className={classes.mainWrapper} gap='1rem'>
@@ -25,4 +29,4 @@ const Wrapper = ({children}: Props) => {
     );
 };
 
-export default Wrapper;
+export default observer(Wrapper);

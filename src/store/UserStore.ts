@@ -7,7 +7,7 @@ import AuthServices from "../services/AuthServices";
 
 export default class UserStore {
     user = {} as IUser;
-    isAuth = !false;
+    isAuth = false;
     isLoading = false;
 
     constructor() {
@@ -31,6 +31,7 @@ export default class UserStore {
             const response = await AuthServices.login(email, password);
             console.table(response);
             localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('rtoken', response.data.refreshToken);
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e: any) {
@@ -68,6 +69,7 @@ export default class UserStore {
             const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true});
             console.table(response);
             localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('rtoken', response.data.refreshToken);
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e: any) {

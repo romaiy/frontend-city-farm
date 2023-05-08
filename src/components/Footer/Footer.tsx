@@ -1,8 +1,11 @@
 import { createStyles, rem, Flex, ThemeIcon, Image, Title, Text, Stack } from '@mantine/core';
+import { observer } from 'mobx-react-lite';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/navbar/logo-rotate.svg';
+import { Context } from '../../main';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, isAuth:boolean) => ({
   footer: {
     marginTop: rem(32),
   },
@@ -11,7 +14,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    padding: '32px 32px 64px',
+    padding: isAuth ? '32px 32px 64px' : '32px 80px 64px 80px',
 
     [theme.fn.smallerThan('sm')]: {
       flexDirection: 'column',
@@ -29,8 +32,9 @@ interface FooterCenteredProps {
   links: { path: string; title: string }[];
 }
 
-export function FooterCentered({ links }: FooterCenteredProps) {
-  const { classes } = useStyles();
+const FooterCentered = ({ links }: FooterCenteredProps) => {
+  const { UStore } = useContext(Context);
+  const { classes } = useStyles(UStore.isAuth);
   const discription = ['45009,', 'Brooksmouth,', 'Nicolas Park,', 'Apt. 542'];
   const useful = [
     {path: '/', title: 'Пользовательское соглашение'}, 
@@ -93,3 +97,5 @@ export function FooterCentered({ links }: FooterCenteredProps) {
     </div>
   );
 }
+
+export default observer(FooterCentered);

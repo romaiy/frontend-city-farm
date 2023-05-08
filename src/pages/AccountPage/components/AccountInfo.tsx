@@ -23,7 +23,7 @@ const AccountInfo = () => {
                     </AccountInfoBlock>
                     <AccountInfoBlock>
                         <>Почта</>
-                        Hilton_Cruickshank0@hotmail.com
+                        {UStore.user.email}
                     </AccountInfoBlock>
                 </Stack>
             </Flex>

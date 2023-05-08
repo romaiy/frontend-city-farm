@@ -17,6 +17,7 @@ import bgImage5 from '../assets/mockdata/type/5.png';
 export default class PlantStore {
     plants = {} as IPlant[];
     types = {} as IPlantType[];
+    selectedPlant = {} as IPlant;
     selectedType = {} as IPlantType;
 
     constructor() {
@@ -47,5 +48,9 @@ export default class PlantStore {
 
     setSelectedType(type: IPlantType) {
         this.selectedType = type;
-    }
+    };
+
+    setSelectedPlant(plant: IPlant) {
+        this.selectedPlant = plant;
+    };
 }
