@@ -12,10 +12,19 @@ const StroeCategories = () => {
     const { PStore } = useContext(Context);
 
     useEffect(() => {
+        let isCancelled = false;
         try {
-            PlantServices.fetchTypes().then(response => PStore.setTypes(response.data));
+            PlantServices.fetchTypes().then((response) => {
+                if (!isCancelled) { 
+                    PStore.setTypes(response.data)
+                }
+            });
         } catch (e) {
-            console.log(e)
+            console.log(e);
+        };
+
+        return () => {
+            isCancelled = true;
         }
     }, []);
 
@@ -24,7 +33,7 @@ const StroeCategories = () => {
             Категории
             <Flex gap={8}>
                 {PStore.types.map((item) => (
-                    <Category {...item} key={item.id}/>
+                    <Category {...item} key={item._id}/>
                 ))}
             </Flex>
         </BlockWrapper>

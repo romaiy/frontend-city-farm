@@ -5,23 +5,23 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../../main";
 
 interface CategoryProps {
-    id: number,
-    image: string;
+    _id: string,
+    icon: string;
     name: string;
 }
 
-const Category = ({ id, image, name}: CategoryProps) => {
+const Category = ({ _id, icon, name}: CategoryProps) => {
     const { PStore } = useContext(Context);
     const navigate = useNavigate();
 
     const handleSelect = () => {
-        PStore.setSelectedType({id: id, name: name, image: image});
+        PStore.setSelectedType({_id: _id, name: name, icon: icon});
         navigate(`/shop/category`)
     };
 
     return(
         <Box onClick={handleSelect} w={192} h={158} style={{cursor: 'pointer'}}>
-            <BackgroundImage style={{padding: '24px 24px 98px'}}  radius={16} src={image}>
+            <BackgroundImage style={{padding: '24px 24px 98px'}}  radius={16} src={icon}>
                 <Title w={144} h={36} size="h4" color="gray.8">{name}</Title>
             </BackgroundImage>
         </Box>

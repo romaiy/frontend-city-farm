@@ -49,7 +49,7 @@ const CategoryPage: FC = () => {
                     <Flex gap="1rem">
                         {PStore.plants.map((item) => {
                             if (item.type === PStore.selectedType.name) {
-                                return <Plant {...item} key={item.id}/>
+                                return <Plant {...item} key={item._id}/>
                             }
                         })}
                     </Flex>

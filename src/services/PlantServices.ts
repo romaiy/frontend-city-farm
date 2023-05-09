@@ -6,14 +6,14 @@ import { IPlantType } from "../models/IPlantType";
 export default class PlantServices {
 
     static fetchTypes(): Promise<AxiosResponse<IPlantType[]>> {
-        return $api.get<IPlantType[]>('/plantTypes');
+        return $api.get<IPlantType[]>('/types');
     };
 
     static fetchPlants(): Promise<AxiosResponse<IPlant[]>> {
-        return $api.get<IPlant[]>('/plants');
+        return $api.get<IPlant[]>('/lots');
     };
 
-    static selectPlant(id: number): Promise<AxiosResponse<IPlant>> {
-        return $api.post<IPlant>('/plants', { id })
+    static selectPlant(id: string): Promise<AxiosResponse<IPlant>> {
+        return $api.get<IPlant>('/lot' + '/' + id)
     };
 };

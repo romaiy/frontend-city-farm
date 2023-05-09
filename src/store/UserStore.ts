@@ -29,7 +29,6 @@ export default class UserStore {
     async login(email: string, password: string) {
         try {
             const response = await AuthServices.login(email, password);
-            console.table(response);
             localStorage.setItem('token', response.data.accessToken);
             localStorage.setItem('rtoken', response.data.refreshToken);
             this.setAuth(true);
@@ -42,7 +41,6 @@ export default class UserStore {
     async registration(email: string, password: string) {
         try {
             const response = await AuthServices.registration(email, password);
-            console.table(response);
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
@@ -56,6 +54,7 @@ export default class UserStore {
             const response = await AuthServices.logout();
             console.table(response);
             localStorage.removeItem('token');
+            localStorage.removeItem('rtoken');
             this.setAuth(false);
             this.setUser({} as IUser);
         } catch (e: any) {
@@ -66,8 +65,7 @@ export default class UserStore {
     async checkAuth() {
         this.setLoading(true);
         try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true});
-            console.table(response);
+            const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {refreshToken: `${localStorage.getItem('rtoken')}`} );
             localStorage.setItem('token', response.data.accessToken);
             localStorage.setItem('rtoken', response.data.refreshToken);
             this.setAuth(true);

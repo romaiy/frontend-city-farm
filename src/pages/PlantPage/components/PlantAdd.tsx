@@ -1,4 +1,5 @@
 import { Card, Flex, Image, Title, Stack, Text, createStyles, Divider, Box, NumberInput, Button } from "@mantine/core";
+import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 
 const useStyles = createStyles((theme) => ({
@@ -31,24 +32,25 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface PlantProps {
-    id: number;
+    _id: string;
     icon: string;
     name: string;
-    price: string;
+    price: number;
     farm: string;
 }
 
 const PlantAdd = ({icon, name, price, farm}: PlantProps) => {
+
     const { classes } = useStyles();
     const [weight, setWeight] = useState(500);
-    const [wallet, setWallet] = useState(+price * weight/1000);
+    const [wallet, setWallet] = useState(0);
 
     const handleChange = (e: number) => {
         setWeight(e);
     }
 
     useEffect(() => {
-        setWallet(+price * weight/1000);
+        setWallet(price * weight/1000);
     }, [weight]);
 
     return(
@@ -59,7 +61,7 @@ const PlantAdd = ({icon, name, price, farm}: PlantProps) => {
                     <Stack spacing={16}>
                         <Title size="h1" color="gray.8">{name}</Title>
                         <Stack spacing={8}>
-                            <Title size="h2" color="orange.4">{wallet} руб</Title>
+                            <Title size="h2" color="orange.4">{wallet ? wallet : price * weight/1000} руб</Title>
                             <Text color="gray.2" className={classes.text}>{price} руб за 1 кг</Text>
                         </Stack>
                         <Divider color="#F2F2F2" size={'1px'}/>
@@ -106,4 +108,4 @@ const PlantAdd = ({icon, name, price, farm}: PlantProps) => {
     );
 };
 
-export default PlantAdd;
+export default observer(PlantAdd);

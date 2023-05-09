@@ -1,8 +1,8 @@
 export interface IPlant {
-    id: number;
+    _id: string;
     name: string;
     icon: string;
-    price: string;
+    price: number;
     type: string;
     farm: string;
-}
+};

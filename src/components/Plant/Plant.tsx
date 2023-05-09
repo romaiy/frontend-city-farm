@@ -31,20 +31,20 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface PlantProps {
-    id: number;
+    _id: string;
     icon: string;
     name: string;
-    price: string;
+    price: number;
 }
 
-const Plant = ({icon, name, price, id}: PlantProps) => {
+const Plant = ({icon, name, price, _id}: PlantProps) => {
     const { UStore } = useContext(Context);
     const { classes } = useStyles();
     const navigate = useNavigate();
 
     return(
         <Stack 
-            onClick={UStore.isAuth ? () => navigate(PLANT_ROUT + '/' + id) : () => navigate(LOGIN_ROUTE)} 
+            onClick={UStore.isAuth ? () => navigate(PLANT_ROUT + '/' + _id) : () => navigate(LOGIN_ROUTE)} 
             className={classes.block} 
             style={{cursor: 'pointer'}} 
             spacing={9}

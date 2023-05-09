@@ -2,20 +2,24 @@ import { MantineProvider } from '@mantine/core';
 import { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import GardenStore from './store/GardenStore';
 import PlantStore from './store/PlantStore';
 import UserStore from './store/UserStore';
 
 interface State {
   UStore: UserStore,
   PStore: PlantStore,
+  GStore: GardenStore,
 }
 
 const UStore = new UserStore();
 const PStore = new PlantStore();
+const GStore = new GardenStore();
 
 export const Context = createContext<State>({
   UStore,
   PStore,
+  GStore
 });
 
 const root = ReactDOM.createRoot(
@@ -23,7 +27,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <Context.Provider value={{ UStore, PStore }}>
+  <Context.Provider value={{ UStore, PStore, GStore }}>
     <MantineProvider 
       withNormalizeCSS 
       withGlobalStyles
