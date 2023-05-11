@@ -8,7 +8,7 @@ import HeaderSearch from "./Header/Header";
 import NavbarMinimal  from "./Navbar";
 
 const AppRouter = () => {
-    const {UStore} = useContext(Context);
+    const {UStore, GStore} = useContext(Context);
     const location = useLocation();
     
     if (UStore.isAuth && (location.pathname === '/login' || location.pathname === '/registration')) {
@@ -17,6 +17,11 @@ const AppRouter = () => {
 
     if (UStore.isAuth && location.pathname === '/') {
         return <Navigate to='/community'/>
+    };
+
+    if (location.pathname === '/garden') {
+        GStore.setSelectedGarden(GStore.gardens[0]);
+        return <Navigate to={`/garden/${GStore.gardens[0]._id}`}/> 
     };
 
     return (

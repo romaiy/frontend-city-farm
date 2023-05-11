@@ -2,7 +2,6 @@ import { Card, Flex, Image, Stack } from "@mantine/core";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Context } from "../../../main";
-import avatar from '../../../assets/avatar.png'
 import AccountInfoBlock from "./AccountInfoBlock";
 
 const AccountInfo = () => {
@@ -11,15 +10,15 @@ const AccountInfo = () => {
     return (
         <Card padding="1.5rem" radius="1rem" bg="#F9F9F9">
             <Flex gap={32} align="center">
-                <Image width={240} height={240} radius={16} src={avatar}/>
+                <Image width={240} height={240} radius={16} src={UStore.user.profilePictureUri}/>
                 <Stack spacing={24}>
                     <AccountInfoBlock>
                         <>Имя Фамилия</>
-                        Юлия Макарова
+                        {UStore.user.lastname + ' ' + UStore.user.name}
                     </AccountInfoBlock>
                     <AccountInfoBlock>
                         <>Имя пользователя</>
-                        Juli87
+                        {UStore.user.username}
                     </AccountInfoBlock>
                     <AccountInfoBlock>
                         <>Почта</>

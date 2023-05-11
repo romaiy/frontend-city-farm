@@ -10,7 +10,12 @@ const useStyles = createStyles(() => ({
         height: '110px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        cursor: 'pointer',
+        transition: 'all 0.1s',
+        '&:hover': {
+            border: '4px solid #F6B22E',
+        }
     },
     full: {
         borderRadius: '16px',
@@ -28,7 +33,10 @@ const Bed = ({ plant }: IBed) => {
     return (
         <Group>
             {!plant ? 
-            <Box className={classes.empty}>
+            <Box 
+                className={classes.empty}
+                
+                >
                 <Image width={48} height={48} src={plus}/>
             </Box> 
             :

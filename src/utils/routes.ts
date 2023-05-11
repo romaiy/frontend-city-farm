@@ -33,7 +33,7 @@ export const authRoutes = [
         title: 'Корзина',
     },
     {
-        path: GARDEN_ROUT,
+        path: GARDEN_ROUT + '/:id',
         Component: GardenPage,
         title: 'Грядки',
     },
