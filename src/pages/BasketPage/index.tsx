@@ -4,7 +4,7 @@ const BasketPage: FC = () => {
 
     return (
         <div>
-            BasketPage1
+            BasketPage2
         </div>
     );
 };
